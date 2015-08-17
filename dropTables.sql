@@ -1,3 +1,5 @@
+DROP VIEW show_schedule;
+
 AlTER TABLE student_course DROP FOREIGN KEY FK_Reference_student_course_student;
 AlTER TABLE student_course DROP FOREIGN KEY FK_Reference_student_course_course;
 AlTER TABLE student DROP FOREIGN KEY FK_Reference_student_class;

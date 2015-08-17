@@ -152,11 +152,24 @@ DROP PROCEDURE IF EXISTS day_course_insert;
 
 DELIMITER //
 
-CREATE PROCEDURE day_course_insert(IN loop_times INT) BEGIN DECLARE i INT DEFAULT 0;
+CREATE PROCEDURE day_course_insert(IN loop_times INT) BEGIN
+DECLARE i INT DEFAULT 0;
+DECLARE scheduleId INT;
+DECLARE courseId INT;
 
 WHILE i < loop_times DO SET i = i + 1;
+SET scheduleId = Rand()*loop_times;
+SET courseId = Rand()*loop_times;
 
-INSERT INTO day_course (schedule_id, day_id, course_id) VALUES(i, i%7+1, loop_times-i+1);
+IF scheduleId < 1
+THEN SET scheduleId = 1;
+END IF;
+
+IF courseId < 1
+THEN SET courseId = 1;
+END IF;
+
+INSERT INTO day_course (schedule_id, day_id, course_id) VALUES(scheduleId, i%7+1, courseId);
 
 END WHILE;
 END//

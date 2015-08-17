@@ -58,3 +58,10 @@ ALTER TABLE day_course ADD CONSTRAINT FK_Reference_day_course_day FOREIGN KEY (d
 
 ALTER TABLE day_course ADD CONSTRAINT FK_Reference_day_course_course FOREIGN KEY (course_id)
   REFERENCES course (id) ON DELETE restrict ON UPDATE restrict;
+
+
+  CREATE VIEW show_schedule AS
+   SELECT name, sex, day_name,course_name, course_time from
+   (SELECT id, name, sex, day_id, course_id from (SELECT * from
+    student LIMIT 20, 10) s, day_course where day_course.schedule_id = s.schedule_id) tem,
+     day, course where tem.day_id = day.id AND tem.course_id = course.id;
