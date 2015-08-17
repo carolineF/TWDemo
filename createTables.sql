@@ -1,60 +1,60 @@
-CREATE TABLE day(
+CREATE TABLE IF NOT EXISTS day(
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  dayName VARCHAR(6) NOT NULL
+  day_name VARCHAR(6) NOT NULL
 );
 
-CREATE TABLE course(
+CREATE TABLE IF NOT EXISTS course(
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  courseName VARCHAR(20) NOT NULL,
-  courseTime TIME
+  course_name VARCHAR(20) NOT NULL,
+  course_time TIME
 );
 
-CREATE TABLE schedule(
+CREATE TABLE IF NOT EXISTS schedule(
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT
 );
 
-CREATE TABLE student(
+CREATE TABLE IF NOT EXISTS student(
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   name VARCHAR(10) NOT NULL,
   sex VARCHAR(2) DEFAULT '男',
-  classId INT,
-  scheduleId INT
+  class_id INT,
+  schedule_id INT
 );
 
-CREATE TABLE class(
+CREATE TABLE IF NOT EXISTS class(
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  className VARCHAR(20)
+  class_name VARCHAR(20)
 );
 
-CREATE TABLE studentCourse(
-  studentId INT,
-  courseId INT
+CREATE TABLE IF NOT EXISTS student_course(
+  student_id INT,
+  course_id INT
 );
 
-CREATE TABLE dayCourse(
-  scheduleId INT,
-  dayId INT,
-  courseId INT
+CREATE TABLE IF NOT EXISTS day_course(
+  schedule_id INT,
+  day_id INT,
+  course_id INT
 );
 
 
-ALTER TABLE studentCourse ADD CONSTRAINT FK_Reference_1 FOREIGN KEY (studentId)
+ALTER TABLE student_course ADD CONSTRAINT FK_Reference_student_course_student FOREIGN KEY (student_id)
   REFERENCES student (id) ON DELETE restrict ON UPDATE restrict;
 
-ALTER TABLE studentCourse ADD CONSTRAINT FK_Reference_2 FOREIGN KEY (courseId)
+ALTER TABLE student_course ADD CONSTRAINT FK_Reference_student_course_course FOREIGN KEY (course_id)
   REFERENCES course (id) ON DELETE restrict ON UPDATE restrict;
 
-ALTER TABLE student ADD CONSTRAINT FK_Reference_3 FOREIGN KEY (classId)
+ALTER TABLE student ADD CONSTRAINT FK_Reference_student_class FOREIGN KEY (class_id)
   REFERENCES class (id) ON DELETE restrict ON UPDATE restrict;
 
-ALTER TABLE student ADD CONSTRAINT FK_Reference_4 FOREIGN KEY (scheduleId)
+ALTER TABLE student ADD CONSTRAINT FK_Reference_student_schedule FOREIGN KEY (schedule_id)
   REFERENCES schedule (id) ON DELETE restrict ON UPDATE restrict;
 
-ALTER TABLE dayCourse ADD CONSTRAINT FK_Reference_5 FOREIGN KEY (scheduleId)
+ALTER TABLE day_course ADD CONSTRAINT FK_Reference_day_course_schedule FOREIGN KEY (schedule_id)
   REFERENCES schedule (id) ON DELETE restrict ON UPDATE restrict;
 
-ALTER TABLE dayCourse ADD CONSTRAINT FK_Reference_6 FOREIGN KEY (dayId)
+ALTER TABLE day_course ADD CONSTRAINT FK_Reference_day_course_day FOREIGN KEY (day_id)
   REFERENCES day (id) ON DELETE restrict ON UPDATE restrict;
 
-ALTER TABLE dayCourse ADD CONSTRAINT FK_Reference_7 FOREIGN KEY (courseId)
+ALTER TABLE day_course ADD CONSTRAINT FK_Reference_day_course_course FOREIGN KEY (course_id)
   REFERENCES course (id) ON DELETE restrict ON UPDATE restrict;
