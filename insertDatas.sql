@@ -14,7 +14,7 @@ END//
 
 DELIMITER ;
 
-CALL class_insert(50);
+CALL class_insert(5);
 
 
 
@@ -97,21 +97,15 @@ DROP PROCEDURE IF EXISTS student_insert;
 DELIMITER //
 
 CREATE PROCEDURE student_insert(IN loop_times INT) BEGIN DECLARE i INT DEFAULT 0;
-DECLARE classId INT;
 DECLARE stuSex VARCHAR(2);
 
 WHILE i < loop_times DO SET i = i + 1;
-SET classId = Rand()*loop_times;
 
 IF i%2 > 0 THEN SET stuSex = '男';
 ELSE SET stuSex = '女';
 END IF;
 
-IF classId < 1
-THEN SET classId = 1;
-END IF;
-
-INSERT INTO student (name, sex, class_id, schedule_id) VALUES(CONCAT('学生', i), stuSex, classId, i);
+INSERT INTO student (name, sex, class_id, schedule_id) VALUES(CONCAT('学生', i), stuSex, i%5+1, i);
 
 END WHILE;
 END//

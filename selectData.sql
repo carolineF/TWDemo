@@ -1,6 +1,6 @@
 SELECT * FROM student LIMIT 20, 10;
 
-SELECT * FROM class LIMIT 20, 10;
+SELECT * FROM class;
 
 SELECT * FROM course LIMIT 20, 10;
 
