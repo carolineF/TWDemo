@@ -39,25 +39,25 @@ CREATE TABLE IF NOT EXISTS day_course(
 
 
 ALTER TABLE student_course ADD CONSTRAINT FK_Reference_student_course_student FOREIGN KEY (student_id)
-  REFERENCES student (id) ON DELETE restrict ON UPDATE restrict;
+  REFERENCES student (id) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE student_course ADD CONSTRAINT FK_Reference_student_course_course FOREIGN KEY (course_id)
-  REFERENCES course (id) ON DELETE restrict ON UPDATE restrict;
+  REFERENCES course (id) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE student ADD CONSTRAINT FK_Reference_student_class FOREIGN KEY (class_id)
-  REFERENCES class (id) ON DELETE restrict ON UPDATE restrict;
+  REFERENCES class (id) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE student ADD CONSTRAINT FK_Reference_student_schedule FOREIGN KEY (schedule_id)
-  REFERENCES schedule (id) ON DELETE restrict ON UPDATE restrict;
+  REFERENCES schedule (id) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE day_course ADD CONSTRAINT FK_Reference_day_course_schedule FOREIGN KEY (schedule_id)
-  REFERENCES schedule (id) ON DELETE restrict ON UPDATE restrict;
+  REFERENCES schedule (id) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE day_course ADD CONSTRAINT FK_Reference_day_course_day FOREIGN KEY (day_id)
-  REFERENCES day (id) ON DELETE restrict ON UPDATE restrict;
+  REFERENCES day (id) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE day_course ADD CONSTRAINT FK_Reference_day_course_course FOREIGN KEY (course_id)
-  REFERENCES course (id) ON DELETE restrict ON UPDATE restrict;
+  REFERENCES course (id) ON DELETE CASCADE ON UPDATE CASCADE;
 
 
   CREATE VIEW show_schedule AS

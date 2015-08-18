@@ -17,4 +17,4 @@ SELECT name, course_name, course_time FROM (SELECT course_id , name FROM
 
 
 
-select * from show_schedule;
+select * from show_schedule ORDER BY name;
